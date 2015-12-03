@@ -1281,9 +1281,12 @@ MediaPlayer = function(context) {
     }, getDVRWindowSize = function() {
         return getDVRInfoMetric.call(this).manifestInfo.DVRWindowSize;
     }, getDVRSeekOffset = function(value) {
-        var metric = getDVRInfoMetric.call(this), val = metric.range.start + value;
-        if (val > metric.range.end) {
-            val = metric.range.end;
+        var metric = getDVRInfoMetric.call(this), val = value;
+        if( metric ) {
+            val = metric.range.start + value;
+            if (val > metric.range.end) {
+                val = metric.range.end;
+            }
         }
         return val;
     }, seek = function(value) {
